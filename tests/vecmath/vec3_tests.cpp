@@ -1,53 +1,18 @@
 #include <vecmath/vec3.h>
+#include "test_types.h"
 using vecmath::vec3;
 
-class vec3_test {
-	const vec3 initial;
-	const vec3 test_vector;
-	const floatp test_float;
-
-	// Hopefully 2^-17 is more than large enough for fair float equality
-	constexpr static floatp tolerance = 0.00000762939453125;
-
-	bool test_equals(const vec3& test, const vec3& expected)
-	{
-		// Manually generate a vector with slightly lower values, and
-		// one with slightly higher values
-		vec3 lower = {expected.x - tolerance,
-		              expected.y - tolerance,
-		              expected.z - tolerance};
-
-		vec3 upper = {expected.x + tolerance,
-		              expected.y + tolerance,
-		              expected.z + tolerance};
-
-		// Perform the test via a sequence of boolean AND operations, so
-		// that if any of them return 'false' the rest of them will too
-		bool result = true;
-
-		result &= test.x >= lower.x;
-		result &= test.y >= lower.y;
-		result &= test.z >= lower.z;
-
-		result &= test.x <= upper.x;
-		result &= test.y <= upper.y;
-		result &= test.z <= upper.z;
-
-		return result;
-	}
-
+class vec3_test: test_base<vec3> {
 public:
 	vec3_test(vec3 init_vec, vec3 vec_value, floatp float_value):
-		initial(init_vec),
-		test_vector(vec_value),
-		test_float(float_value)
+		test_base(init_vec, vec_value, float_value)
 	{}
 
 	// Test operators where the right-hand side is a vec3
 	bool test_vector_addeq(const vec3& expected)
 	{
 		vec3 copy = initial;
-		copy += test_vector;
+		copy += test_t;
 
 		return test_equals(copy, expected);
 	}
@@ -55,7 +20,7 @@ public:
 	bool test_vector_subeq(const vec3& expected)
 	{
 		vec3 copy = initial;
-		copy -= test_vector;
+		copy -= test_t;
 
 		return test_equals(copy, expected);
 	}
@@ -63,7 +28,7 @@ public:
 	bool test_vector_muleq(const vec3& expected)
 	{
 		vec3 copy = initial;
-		copy *= test_vector;
+		copy *= test_t;
 
 		return test_equals(copy, expected);
 	}
@@ -71,29 +36,29 @@ public:
 	bool test_vector_diveq(const vec3& expected)
 	{
 		vec3 copy = initial;
-		copy /= test_vector;
+		copy /= test_t;
 
 		return test_equals(copy, expected);
 	}
 
 	bool test_vector_add(const vec3& expected)
 	{
-		return test_equals(initial + test_vector, expected);
+		return test_equals(initial + test_t, expected);
 	}
 
 	bool test_vector_sub(const vec3& expected)
 	{
-		return test_equals(initial - test_vector, expected);
+		return test_equals(initial - test_t, expected);
 	}
 
 	bool test_vector_mul(const vec3& expected)
 	{
-		return test_equals(initial*test_vector, expected);
+		return test_equals(initial* test_t, expected);
 	}
 
 	bool test_vector_div(const vec3& expected)
 	{
-		return test_equals(initial/test_vector, expected);
+		return test_equals(initial/ test_t, expected);
 	}
 
 	// Test operators where the right-hand side is a floatp

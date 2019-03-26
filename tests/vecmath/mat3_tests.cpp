@@ -1,66 +1,18 @@
 #include <vecmath/mat3.h>
+#include "test_types.h"
 using vecmath::mat3;
 
-class mat3_test {
-	const mat3 initial;
-	const mat3 test_vector;
-	const floatp test_float;
-
-	// Hopefully 2^-17 is more than large enough for fair float equality
-	constexpr static floatp tolerance = 0.00000762939453125;
-
-	bool test_equals(const mat3& test, const mat3& expected)
-	{
-		// Manually generate a matrix with slightly lower values, and
-		// one with slightly higher values (vector operator overloads
-		// are assumed to work, though are tested in vec3_tests.cpp)
-		mat3 lower = {expected.x - tolerance,
-		              expected.y - tolerance,
-		              expected.z - tolerance};
-
-		mat3 upper = {expected.x + tolerance,
-		              expected.y + tolerance,
-		              expected.z + tolerance};
-
-		// Perform the test via a sequence of boolean AND operations, so
-		// that if any of them return 'false' the rest of them will too
-		bool result = true;
-
-		result &= test.x.x >= lower.x.x;
-		result &= test.x.y >= lower.x.y;
-		result &= test.x.z >= lower.x.z;
-		result &= test.y.x >= lower.y.x;
-		result &= test.y.y >= lower.y.y;
-		result &= test.y.z >= lower.y.z;
-		result &= test.z.x >= lower.z.x;
-		result &= test.z.y >= lower.z.y;
-		result &= test.z.z >= lower.z.z;
-
-		result &= test.x.x <= upper.x.x;
-		result &= test.x.y <= upper.x.y;
-		result &= test.x.z <= upper.x.z;
-		result &= test.y.x <= upper.y.x;
-		result &= test.y.y <= upper.y.y;
-		result &= test.y.z <= upper.y.z;
-		result &= test.z.x <= upper.z.x;
-		result &= test.z.y <= upper.z.y;
-		result &= test.z.z <= upper.z.z;
-
-		return result;
-	}
-
+class mat3_test: test_base<mat3> {
 public:
 	mat3_test(mat3 init_mat, mat3 mat_value, floatp float_value):
-		initial(init_mat),
-		test_vector(mat_value),
-		test_float(float_value)
+		test_base(init_mat, mat_value, float_value)
 	{}
 
 	// Test operators where the right-hand side is a mat3
 	bool test_matrix_addeq(const mat3& expected)
 	{
 		mat3 copy = initial;
-		copy += test_vector;
+		copy += test_t;
 
 		return test_equals(copy, expected);
 	}
@@ -68,7 +20,7 @@ public:
 	bool test_matrix_subeq(const mat3& expected)
 	{
 		mat3 copy = initial;
-		copy -= test_vector;
+		copy -= test_t;
 
 		return test_equals(copy, expected);
 	}
@@ -76,7 +28,7 @@ public:
 	bool test_matrix_muleq(const mat3& expected)
 	{
 		mat3 copy = initial;
-		copy *= test_vector;
+		copy *= test_t;
 
 		return test_equals(copy, expected);
 	}
@@ -84,22 +36,22 @@ public:
 	bool test_matrix_diveq(const mat3& expected)
 	{
 		mat3 copy = initial;
-		copy /= test_vector;
+		copy /= test_t;
 
 		return test_equals(copy, expected);
 	}
 
 	bool test_matrix_add(const mat3& expected)
-	{return test_equals(initial + test_vector, expected);}
+	{return test_equals(initial + test_t, expected);}
 
 	bool test_matrix_sub(const mat3& expected)
-	{return test_equals(initial - test_vector, expected);}
+	{return test_equals(initial - test_t, expected);}
 
 	bool test_matrix_mul(const mat3& expected)
-	{return test_equals(initial*test_vector, expected);}
+	{return test_equals(initial* test_t, expected);}
 
 	bool test_matrix_div(const mat3& expected)
-	{return test_equals(initial/test_vector, expected);}
+	{return test_equals(initial/ test_t, expected);}
 
 	// Test operators where the right-hand side is a floatp
 	bool test_float_addeq(const mat3& expected)

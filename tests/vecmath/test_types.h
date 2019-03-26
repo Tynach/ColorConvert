@@ -1,13 +1,14 @@
 #pragma once
 #include <vecmath/conf.h>
 
-template <class T> class test {
+template <class T> class test_base {
+	// Hopefully 2^-17 is more than large enough for fair float equality
+	constexpr static floatp tolerance = 0.00000762939453125;
+
+protected:
 	const T initial;
 	const T test_t;
 	const floatp test_float;
-
-	// Hopefully 2^-17 is more than large enough for fair float equality
-	constexpr static floatp tolerance = 0.00000762939453125;
 
 	bool test_equals(const T& test, const T& expected)
 	{
@@ -16,8 +17,8 @@ template <class T> class test {
 		T lower, upper;
 
 		for (int i = 0; i < sizeof(T)/sizeof(floatp); ++i) {
-			((floatp*)lower)[i] = ((floatp*)expected)[i] - tolerance;
-			((floatp*)upper)[i] = ((floatp*)expected)[i] + tolerance;
+			((floatp*)&lower)[i] = ((floatp*)&expected)[i] - tolerance;
+			((floatp*)&upper)[i] = ((floatp*)&expected)[i] + tolerance;
 		}
 
 		// Perform the test via a sequence of boolean AND operations, so
@@ -25,15 +26,15 @@ template <class T> class test {
 		bool result = true;
 
 		for (int i = 0; i < sizeof(T)/sizeof(floatp); ++i) {
-			result &= ((floatp*)test)[i] >= ((floatp*)lower)[i];
-			result &= ((floatp*)test)[i] <= ((floatp*)upper)[i];
+			result &= ((floatp*)&test)[i] >= ((floatp*)&lower)[i];
+			result &= ((floatp*)&test)[i] <= ((floatp*)&upper)[i];
 		}
 
 		return result;
 	}
 
 public:
-	test(T init_t, T t_value, floatp float_value):
+	test_base(T init_t, T t_value, floatp float_value):
 		initial(init_t),
 		test_t(t_value),
 		test_float(float_value)

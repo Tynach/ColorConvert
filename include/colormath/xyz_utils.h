@@ -5,19 +5,19 @@ using vecmath::vec3;
 using vecmath::mat3;
 
 namespace colormath {
-	const mat3 BRADFORD = mat3(
-		0.8951L, -0.7502L, 0.0389L,
-		0.2664L, 1.7135L, -0.0685L,
-		-0.1614L, 0.0367L, 1.0296L
-	);
+	const mat3 BRADFORD = {
+		0.8951, -0.7502, 0.0389,
+		0.2664, 1.7135, -0.0685,
+		-0.1614, 0.0367, 1.0296
+	};
 
-	const vec3 white(const floatp& x, const floatp& y)
+	const vec3 chromaticity(const floatp& x, const floatp& y)
 	{
-		return vec3(x, y, 1.0L - x - y);
+		return {x, y, 1.0 - x - y};
 	}
 
 	const vec3 bright(const vec3& white)
 	{
-		return vec3(white.x/white.y, 1, white.z/white.y);
+		return {white.x/white.y, 1, white.z/white.y};
 	}
 }

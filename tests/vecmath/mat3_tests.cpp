@@ -102,106 +102,241 @@ public:
 int main()
 {
 	mat3_test case1 = mat3_test(
-		{0.1, 0.2, 0.3,
-		 0.4, 0.5, 0.6,
-		 0.7, 0.8, 0.9},
+		{0.1, 0.2, 0.0,
+		 0.0, 0.2, 0.0,
+		 0.0, 0.2, 0.3},
 
-		{0.2, 0.4, 0.6,
-		 0.8, 1.0, 1.2,
-		 1.4, 1.6, 1.8},
+		{0.0, 0.2, 0.1,
+		 0.0, 0.2, 0.0,
+		 0.3, 0.2, 0.0},
 
 		2.5
 	);
 
 	int test_num = 1;
-	if (!case1.test_matrix_addeq({0.3, 0.6, 0.9,
-	                              1.2, 1.5, 1.8,
-	                              2.1, 2.4, 2.7})) {
+	if (!case1.test_matrix_addeq({0.1, 0.4, 0.1,
+	                              0.0, 0.4, 0.0,
+	                              0.3, 0.4, 0.3})) {
 		return test_num;
 	}
 
-	/*mat3 foo = {0.0, 0.1, 0.2,
-	            0.3, 0.4, 0.5,
-	            0.6, 0.7, 0.8};
+	test_num++;
+	if (!case1.test_matrix_subeq({0.1, 0.0, -0.1,
+	                              0.0, 0.0,  0.0,
+	                             -0.3, 0.0,  0.3})) {
+		return test_num;
+	}
 
-	// float operator overload tests
-	mat3 correct_af = {foo.x + 2.0, foo.y + 2.0, foo.z + 2.0};
-	mat3 correct_sf = {foo.x - 2.0, foo.y - 2.0, foo.z - 2.0};
-	mat3 correct_mf = {foo.x*2.0, foo.y*2.0, foo.z*2.0};
-	mat3 correct_df = {foo.x/2.0, foo.y/2.0, foo.z/2.0};
+	test_num++;
+	if (!case1.test_matrix_muleq({0.00, 0.06, 0.03,
+	                              0.00, 0.04, 0.00,
+	                              0.03, 0.10, 0.00})) {
+		return test_num;
+	}
 
-	mat3 correct_afe = {foo.x + 2.0, foo.y + 2.0, foo.z + 2.0};
-	mat3 correct_sfe = {foo.x - 2.0, foo.y - 2.0, foo.z - 2.0};
-	mat3 correct_mfe = {foo.x*2.0, foo.y*2.0, foo.z*2.0};
-	mat3 correct_dfe = {foo.x/2.0, foo.y/2.0, foo.z/2.0};
+	test_num++;
+	if (!case1.test_matrix_diveq({0, 0, 1,
+	                              0, 1, 0,
+	                              1, 0, 0})) {
+		return test_num;
+	}
 
-	mat3 test_afe = foo;
-	mat3 test_sfe = foo;
-	mat3 test_mfe = foo;
-	mat3 test_dfe = foo;
-	test_afe += 2.0;
-	test_sfe -= 2.0;
-	test_mfe *= 2.0;
-	test_dfe /= 2.0;
+	test_num++;
+	if (!case1.test_matrix_add({0.1, 0.4, 0.1,
+	                            0.0, 0.4, 0.0,
+	                            0.3, 0.4, 0.3})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (!case1.test_matrix_sub({0.1, 0.0, -0.1,
+	                            0.0, 0.0,  0.0,
+	                           -0.3, 0.0,  0.3})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (!case1.test_matrix_mul({0.00, 0.06, 0.03,
+	                            0.00, 0.04, 0.00,
+	                            0.03, 0.10, 0.00})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (!case1.test_matrix_div({0, 0, 1,
+	                            0, 1, 0,
+	                            1, 0, 0})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (!case1.test_float_addeq({2.6, 2.7, 2.5,
+	                             2.5, 2.7, 2.5,
+	                             2.5, 2.7, 2.8})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (!case1.test_float_subeq({-2.4, -2.3, -2.5,
+	                             -2.5, -2.3, -2.5,
+	                             -2.5, -2.3, -2.2})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (!case1.test_float_muleq({0.25, 0.5, 0.00,
+	                             0.00, 0.5, 0.00,
+	                             0.00, 0.5, 0.75})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (!case1.test_float_diveq({0.04, 0.08, 0.00,
+	                             0.00, 0.08, 0.00,
+	                             0.00, 0.08, 0.12})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (!case1.test_float_add({2.6, 2.7, 2.5,
+	                           2.5, 2.7, 2.5,
+	                           2.5, 2.7, 2.8})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (!case1.test_float_sub({-2.4, -2.3, -2.5,
+	                           -2.5, -2.3, -2.5,
+	                           -2.5, -2.3, -2.2})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (!case1.test_float_mul({0.25, 0.5, 0.00,
+	                           0.00, 0.5, 0.00,
+	                           0.00, 0.5, 0.75})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (!case1.test_float_div({0.04, 0.08, 0.00,
+	                           0.00, 0.08, 0.00,
+	                           0.00, 0.08, 0.12})) {
+		return test_num;
+	}
 
 
-	// mat3 operator overload tests
-	mat3 right = {1.0, 2.0, 3.0,
-	              4.0, 5.0, 6.0,
-	              7.0, 8.0, 9.0};
+	test_num++;
+	if (case1.test_matrix_addeq({0.1, 0.4, 0.1,
+	                             0.0, 0.0, 0.0,
+	                             0.3, 0.4, 0.3})) {
+		return test_num;
+	}
 
-	mat3 correct_am = {foo.x + right.x, foo.y + right.y, foo.z + right.z};
-	mat3 correct_sm = {foo.x - right.x, foo.y - right.y, foo.z - right.z};
-	//mat3 correct_mm = {foo.x*right.x, foo.y*right.y, foo.z*right.z};
-	//mat3 correct_dm = {foo.x/right.x, foo.y/right.y, foo.z/right.z};
+	test_num++;
+	if (case1.test_matrix_subeq({0.1, 0.0, -0.1,
+	                             0.0, 1.0,  0.0,
+	                            -0.3, 0.0,  0.3})) {
+		return test_num;
+	}
 
-	mat3 correct_ame = {foo.x + right.x, foo.y + right.y, foo.z + right.z};
-	mat3 correct_sme = {foo.x - right.x, foo.y - right.y, foo.z - right.z};
-	//mat3 correct_mme = {foo.x*right.x, foo.y*right.y, foo.z*right.z};
-	//mat3 correct_dme = {foo.x/right.x, foo.y/right.y, foo.z/right.z};
+	test_num++;
+	if (case1.test_matrix_muleq({0.00, 0.06, 0.03,
+	                             0.00, 0.00, 0.00,
+	                             0.03, 0.10, 0.00})) {
+		return test_num;
+	}
 
-	mat3 test_ame = foo;
-	mat3 test_sme = foo;
-	//mat3 test_mme = foo;
-	//mat3 test_dme = foo;
-	test_ame += right;
-	test_sme -= right;
-	//test_mme *= right;
-	//test_dme /= right;
+	test_num++;
+	if (case1.test_matrix_diveq({0, 0, 1,
+	                             0, 0, 0,
+	                             1, 0, 0})) {
+		return test_num;
+	}
 
-	if (correct_af != foo + 2.0 || correct_af == foo + 2.1) {
-		return 1;
-	} else if (correct_sf != foo - 2.0 || correct_sf == foo - 2.1) {
-		return 2;
-	} else if (correct_mf != foo*2.0 || correct_mf == foo*2.1) {
-		return 3;
-	} else if (correct_df != foo/2.0 || correct_df == foo/2.1) {
-		return 4;
-	} else if (correct_afe != test_afe || correct_afe == test_afe + 0.1) {
-		return 5;
-	} else if (correct_sfe != test_sfe || correct_sfe == test_sfe - 0.1) {
-		return 6;
-	} else if (correct_mfe != test_mfe || correct_mfe == test_mfe*1.1) {
-		return 7;
-	} else if (correct_dfe != test_dfe || correct_dfe == test_dfe/1.1) {
-		return 8;
-	} else if (correct_am != foo + right || correct_am == foo + right + 0.1) {
-		return 9;
-	} else if (correct_sm != foo - right || correct_sm == foo - right - 0.1) {
-		return 10;
-	} *//*else if (correct_mm != foo*right || correct_mm == foo*right*1.1) {
-		return 11;
-	} else if (correct_dm != foo/right || correct_dm == foo/right/1.1) {
-		return 12;
-	} *//*else if (correct_ame != test_ame || correct_ame == test_ame + right + 0.1) {
-		return 13;
-	} else if (correct_sme != test_sme || correct_sme == test_sme + right - 0.1) {
-		return 14;
-	} *//*else if (correct_mme != test_mme || correct_mme == test_mfe*right*1.1) {
-		return 15;
-	} else if (correct_dme != test_dme || correct_dme == test_dfe/right/1.1) {
-		return 16;
-	}*/
+	test_num++;
+	if (case1.test_matrix_add({0.1, 0.4, 0.1,
+	                           0.0, 0.0, 0.0,
+	                           0.3, 0.4, 0.3})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (case1.test_matrix_sub({0.1, 0.0, -0.1,
+	                           0.0, 1.0,  0.0,
+	                          -0.3, 0.0,  0.3})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (case1.test_matrix_mul({0.00, 0.06, 0.03,
+	                           0.00, 0.00, 0.00,
+	                           0.03, 0.10, 0.00})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (case1.test_matrix_div({0, 0, 1,
+	                           0, 0, 0,
+	                           1, 0, 0})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (case1.test_float_addeq({2.6, 2.7, 2.5,
+	                            2.5, 0.0, 2.5,
+	                            2.5, 2.7, 2.8})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (case1.test_float_subeq({-2.4, -2.3, -2.5,
+	                            -2.5,  0.0, -2.5,
+	                            -2.5, -2.3, -2.2})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (case1.test_float_muleq({0.25, 0.5, 0.00,
+	                            0.00, 0.0, 0.00,
+	                            0.00, 0.5, 0.75})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (case1.test_float_diveq({0.04, 0.08, 0.00,
+	                            0.00, 0.00, 0.00,
+	                            0.00, 0.08, 0.12})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (case1.test_float_add({2.6, 2.7, 2.5,
+	                          2.5, 0.0, 2.5,
+	                          2.5, 2.7, 2.8})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (case1.test_float_sub({-2.4, -2.3, -2.5,
+	                          -2.5,  0.0, -2.5,
+	                          -2.5, -2.3, -2.2})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (case1.test_float_mul({0.25, 0.5, 0.00,
+	                          0.00, 0.0, 0.00,
+	                          0.00, 0.5, 0.75})) {
+		return test_num;
+	}
+
+	test_num++;
+	if (case1.test_float_div({0.04, 0.08, 0.00,
+	                          0.00, 0.00, 0.00,
+	                          0.00, 0.08, 0.12})) {
+		return test_num;
+	}
 
 	return 0;
 }

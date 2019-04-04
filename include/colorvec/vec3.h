@@ -1,7 +1,7 @@
 #pragma once
-#include <vecmath/conf.h>
+#include <colorvec/conf.h>
 
-namespace vecmath {
+namespace colorvec {
 	/**
 	 * A 3D vector for holding color values
 	 */

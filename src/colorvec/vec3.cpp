@@ -1,5 +1,5 @@
-#include <vecmath/vec3.h>
-using vecmath::vec3;
+#include <colorvec/vec3.h>
+using colorvec::vec3;
 
 /*const floatp vec3::dot(const vec3& other) const
 {return x*other.x + y*other.y + z*other.z;}

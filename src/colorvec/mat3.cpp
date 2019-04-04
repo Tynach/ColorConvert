@@ -1,7 +1,7 @@
-#include <vecmath/vec3.h>
-#include <vecmath/mat3.h>
-using vecmath::vec3;
-using vecmath::mat3;
+#include <colorvec/vec3.h>
+#include <colorvec/mat3.h>
+using colorvec::vec3;
+using colorvec::mat3;
 
 /*const floatp mat3::det() const
 {

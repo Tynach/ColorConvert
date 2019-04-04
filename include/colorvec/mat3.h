@@ -1,8 +1,8 @@
 #pragma once
-#include <vecmath/conf.h>
-#include <vecmath/vec3.h>
+#include <colorvec/conf.h>
+#include <colorvec/vec3.h>
 
-namespace vecmath {
+namespace colorvec {
 	/**
 	 * A 3x3 square matrix for color conversion calculations
 	 */

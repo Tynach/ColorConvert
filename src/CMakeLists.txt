@@ -1,1 +1,1 @@
-add_subdirectory(vecmath)
+add_subdirectory(colorvec)

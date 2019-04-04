@@ -1,5 +1,5 @@
 #pragma once
-#include <vecmath/conf.h>
+#include <colorvec/conf.h>
 
 template <class T> class test_base {
 	// Hopefully 2^-17 is more than large enough for fair float equality

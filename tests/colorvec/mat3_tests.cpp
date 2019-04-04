@@ -1,6 +1,6 @@
-#include <vecmath/mat3.h>
+#include <colorvec/mat3.h>
 #include "test_types.h"
-using vecmath::mat3;
+using colorvec::mat3;
 
 class mat3_test: test_base<mat3> {
 public:

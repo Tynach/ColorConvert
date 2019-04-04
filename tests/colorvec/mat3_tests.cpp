@@ -2,101 +2,11 @@
 #include "test_types.h"
 using colorvec::mat3;
 
-class mat3_test: test_base<mat3> {
+class mat3_test: public test_base<mat3> {
 public:
 	mat3_test(mat3 init_mat, mat3 mat_value, floatp float_value):
 		test_base(init_mat, mat_value, float_value)
 	{}
-
-	// Test operators where the right-hand side is a mat3
-	bool test_matrix_addeq(const mat3& expected)
-	{
-		mat3 copy = initial;
-		copy += test_t;
-
-		return test_equals(copy, expected);
-	}
-
-	bool test_matrix_subeq(const mat3& expected)
-	{
-		mat3 copy = initial;
-		copy -= test_t;
-
-		return test_equals(copy, expected);
-	}
-
-	bool test_matrix_muleq(const mat3& expected)
-	{
-		mat3 copy = initial;
-		copy *= test_t;
-
-		return test_equals(copy, expected);
-	}
-
-	bool test_matrix_diveq(const mat3& expected)
-	{
-		mat3 copy = initial;
-		copy /= test_t;
-
-		return test_equals(copy, expected);
-	}
-
-	bool test_matrix_add(const mat3& expected)
-	{return test_equals(initial + test_t, expected);}
-
-	bool test_matrix_sub(const mat3& expected)
-	{return test_equals(initial - test_t, expected);}
-
-	bool test_matrix_mul(const mat3& expected)
-	{return test_equals(initial* test_t, expected);}
-
-	bool test_matrix_div(const mat3& expected)
-	{return test_equals(initial/ test_t, expected);}
-
-	// Test operators where the right-hand side is a floatp
-	bool test_float_addeq(const mat3& expected)
-	{
-		mat3 copy = initial;
-		copy += test_float;
-
-		return test_equals(copy, expected);
-	}
-
-	bool test_float_subeq(const mat3& expected)
-	{
-		mat3 copy = initial;
-		copy -= test_float;
-
-		return test_equals(copy, expected);
-	}
-
-	bool test_float_muleq(const mat3& expected)
-	{
-		mat3 copy = initial;
-		copy *= test_float;
-
-		return test_equals(copy, expected);
-	}
-
-	bool test_float_diveq(const mat3& expected)
-	{
-		mat3 copy = initial;
-		copy /= test_float;
-
-		return test_equals(copy, expected);
-	}
-
-	bool test_float_add(const mat3& expected)
-	{return test_equals(initial + test_float, expected);}
-
-	bool test_float_sub(const mat3& expected)
-	{return test_equals(initial - test_float, expected);}
-
-	bool test_float_mul(const mat3& expected)
-	{return test_equals(initial*test_float, expected);}
-
-	bool test_float_div(const mat3& expected)
-	{return test_equals(initial/test_float, expected);}
 };
 
 int main()
@@ -114,56 +24,56 @@ int main()
 	);
 
 	int test_num = 1;
-	if (!case1.test_matrix_addeq({0.1, 0.4, 0.1,
+	if (!case1.test_same_addeq({0.1, 0.4, 0.1,
 	                              0.0, 0.4, 0.0,
 	                              0.3, 0.4, 0.3})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (!case1.test_matrix_subeq({0.1, 0.0, -0.1,
+	if (!case1.test_same_subeq({0.1, 0.0, -0.1,
 	                              0.0, 0.0,  0.0,
 	                             -0.3, 0.0,  0.3})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (!case1.test_matrix_muleq({0.00, 0.06, 0.03,
+	if (!case1.test_same_muleq({0.00, 0.06, 0.03,
 	                              0.00, 0.04, 0.00,
 	                              0.03, 0.10, 0.00})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (!case1.test_matrix_diveq({0, 0, 1,
+	if (!case1.test_same_diveq({0, 0, 1,
 	                              0, 1, 0,
 	                              1, 0, 0})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (!case1.test_matrix_add({0.1, 0.4, 0.1,
+	if (!case1.test_same_add({0.1, 0.4, 0.1,
 	                            0.0, 0.4, 0.0,
 	                            0.3, 0.4, 0.3})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (!case1.test_matrix_sub({0.1, 0.0, -0.1,
+	if (!case1.test_same_sub({0.1, 0.0, -0.1,
 	                            0.0, 0.0,  0.0,
 	                           -0.3, 0.0,  0.3})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (!case1.test_matrix_mul({0.00, 0.06, 0.03,
+	if (!case1.test_same_mul({0.00, 0.06, 0.03,
 	                            0.00, 0.04, 0.00,
 	                            0.03, 0.10, 0.00})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (!case1.test_matrix_div({0, 0, 1,
+	if (!case1.test_same_div({0, 0, 1,
 	                            0, 1, 0,
 	                            1, 0, 0})) {
 		return test_num;
@@ -227,56 +137,56 @@ int main()
 
 
 	test_num++;
-	if (case1.test_matrix_addeq({0.1, 0.4, 0.1,
+	if (case1.test_same_addeq({0.1, 0.4, 0.1,
 	                             0.0, 0.0, 0.0,
 	                             0.3, 0.4, 0.3})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (case1.test_matrix_subeq({0.1, 0.0, -0.1,
+	if (case1.test_same_subeq({0.1, 0.0, -0.1,
 	                             0.0, 1.0,  0.0,
 	                            -0.3, 0.0,  0.3})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (case1.test_matrix_muleq({0.00, 0.06, 0.03,
+	if (case1.test_same_muleq({0.00, 0.06, 0.03,
 	                             0.00, 0.00, 0.00,
 	                             0.03, 0.10, 0.00})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (case1.test_matrix_diveq({0, 0, 1,
+	if (case1.test_same_diveq({0, 0, 1,
 	                             0, 0, 0,
 	                             1, 0, 0})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (case1.test_matrix_add({0.1, 0.4, 0.1,
+	if (case1.test_same_add({0.1, 0.4, 0.1,
 	                           0.0, 0.0, 0.0,
 	                           0.3, 0.4, 0.3})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (case1.test_matrix_sub({0.1, 0.0, -0.1,
+	if (case1.test_same_sub({0.1, 0.0, -0.1,
 	                           0.0, 1.0,  0.0,
 	                          -0.3, 0.0,  0.3})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (case1.test_matrix_mul({0.00, 0.06, 0.03,
+	if (case1.test_same_mul({0.00, 0.06, 0.03,
 	                           0.00, 0.00, 0.00,
 	                           0.03, 0.10, 0.00})) {
 		return test_num;
 	}
 
 	test_num++;
-	if (case1.test_matrix_div({0, 0, 1,
+	if (case1.test_same_div({0, 0, 1,
 	                           0, 0, 0,
 	                           1, 0, 0})) {
 		return test_num;

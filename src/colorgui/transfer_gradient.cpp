@@ -6,7 +6,7 @@ transferGradient::transferGradient(QWidget *parent, transfer *from, transfer *to
 	img = QImage(8192, 1, QImage::Format_RGBA8888);
 	img.setDevicePixelRatio(devicePixelRatioF());
 	setMinimumSize(256/devicePixelRatioF(), fontMetrics().height());
-	setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Maximum);
+	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 }
 
 transferGradient::transferGradient(transfer *from, transfer *to)

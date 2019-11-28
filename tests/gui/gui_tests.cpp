@@ -1,7 +1,7 @@
 #include <colorgui/transfer_gradient.h>
 #include <colormath/transfer.h>
 #include <QApplication>
-#include <QVBoxLayout>
+#include <QFormLayout>
 using colormath::gamma_trc;
 
 int main(int argc, char *argv[])
@@ -12,15 +12,15 @@ int main(int argc, char *argv[])
 
 	QApplication app(argc, argv);
 	QWidget window;
-	QVBoxLayout lay(&window);
+	QFormLayout lay(&window);
 
 	transferGradient gradLinear(&gamLinear, &gamSrgb);
 	transferGradient gradSrgb(&gamSrgb, &gamSrgb);
 	transferGradient gradLab(&gamLab, &gamSrgb);
 
-	lay.addWidget(&gradLinear);
-	lay.addWidget(&gradSrgb);
-	lay.addWidget(&gradLab);
+	lay.addRow("Linear", &gradLinear);
+	lay.addRow("sRGB", &gradSrgb);
+	lay.addRow("L*", &gradLab);
 
 	window.show();
 	return app.exec();

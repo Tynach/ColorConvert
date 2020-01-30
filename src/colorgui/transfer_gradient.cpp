@@ -1,4 +1,11 @@
+#include <colormath/transfer.h>
 #include <colorgui/transfer_gradient.h>
+#include <QImage>
+#include <QEvent>
+#include <QWidget>
+#include <QPainter>
+
+using colormath::transfer;
 
 transferGradient::transferGradient(QWidget *parent, transfer *from, transfer *to)
 : QWidget(parent), from(from), to(to)

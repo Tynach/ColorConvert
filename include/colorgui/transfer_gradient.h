@@ -1,7 +1,7 @@
 #pragma once
+
 #include <colormath/transfer.h>
 #include <QWidget>
-#include <QPainter>
 #include <QImage>
 #include <QEvent>
 using colormath::transfer;

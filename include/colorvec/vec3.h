@@ -1,4 +1,5 @@
 #pragma once
+
 #include <colorvec/conf.h>
 
 namespace colorvec {
@@ -20,73 +21,73 @@ namespace colorvec {
 			};
 		};
 
-		inline const floatp dot(const vec3& other) const
+		inline floatp const dot(vec3 const &other) const
 		{return x*other.x + y*other.y + z*other.z;}
 
-		inline vec3& operator+=(const vec3& other)
+		inline vec3& operator+=(vec3 const &other)
 		{
 			x += other.x, y += other.y, z += other.z;
 			return *this;
 		}
 
-		inline vec3& operator-=(const vec3& other)
+		inline vec3& operator-=(vec3 const &other)
 		{
 			x -= other.x, y -= other.y, z -= other.z;
 			return *this;
 		}
 
-		inline vec3& operator*=(const vec3& other)
+		inline vec3& operator*=(vec3 const &other)
 		{
 			x *= other.x, y *= other.y, z *= other.z;
 			return *this;
 		}
 
-		inline vec3& operator/=(const vec3& other)
+		inline vec3& operator/=(vec3 const &other)
 		{
 			x /= other.x, y /= other.y, z /= other.z;
 			return *this;
 		}
 
-		inline const vec3 operator+(const vec3& other) const
+		inline vec3 const operator+(vec3 const &other) const
 		{return vec3(*this) += other;}
 
-		inline const vec3 operator-(const vec3& other) const
+		inline vec3 const operator-(vec3 const &other) const
 		{return vec3(*this) -= other;}
 
-		inline const vec3 operator*(const vec3& other) const
+		inline vec3 const operator*(vec3 const &other) const
 		{return vec3(*this) *= other;}
 
-		inline const vec3 operator/(const vec3& other) const
+		inline vec3 const operator/(vec3 const &other) const
 		{return vec3(*this) /= other;}
 
-		inline vec3& operator+=(const floatp& other)
+		inline vec3& operator+=(floatp const &other)
 		{return *this += {other, other, other};}
 
-		inline vec3& operator-=(const floatp& other)
+		inline vec3& operator-=(floatp const &other)
 		{return *this -= {other, other, other};}
 
-		inline vec3& operator*=(const floatp& other)
+		inline vec3& operator*=(floatp const &other)
 		{return *this *= {other, other, other};}
 
-		inline vec3& operator/=(const floatp& other)
+		inline vec3& operator/=(floatp const &other)
 		{return *this /= {other, other, other};}
 
-		inline const vec3 operator+(const floatp& other) const
+		inline vec3 const operator+(floatp const &other) const
 		{return vec3(*this) += other;}
 
-		inline const vec3 operator-(const floatp& other) const
+		inline vec3 const operator-(floatp const &other) const
 		{return vec3(*this) -= other;}
 
-		inline const vec3 operator*(const floatp& other) const
+		inline vec3 const operator*(floatp const &other) const
 		{return vec3(*this) *= other;}
 
-		inline const vec3 operator/(const floatp& other) const
+		inline vec3 const operator/(floatp const &other) const
 		{return vec3(*this) /= other;}
 
-		inline bool operator==(const vec3& other) const
+		inline bool operator==(vec3 const &other) const
 		{return (x == other.x) && (y == other.y) && (z == other.z);}
 
-		inline bool operator!=(const vec3& other) const
+		inline bool operator!=(vec3 const &other) const
 		{return !(*this == other);}
 	};
 }
